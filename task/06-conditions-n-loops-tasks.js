@@ -240,7 +240,12 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+    let a = String(num);
+    let b = a.split('');
+    let c = b.reverse();
+    let d = c.join('')
+    let e = Number(d);
+return e;
 }
 
 
@@ -284,7 +289,18 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    let digitalRoot = num;
+    let arr = [];
+    let summ;
+    do{
+      arr  = String(digitalRoot).split("");
+      summ = 0;
+      for (let i = 0; i < arr.length; i++){
+          summ = summ + Number(arr[i]);
+      }
+      digitalRoot = summ;   
+    }while (digitalRoot > 9)
+    return digitalRoot;
 }
 
 
@@ -310,7 +326,82 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+    let bracketsConfig = [['(', ')'], ['[', ']'], ['{', '}'], ['|', '|']];
+    let arr = [];
+    let arr2 = [];
+    let open = [];
+    let close = [];
+    let skob = [];
+    let ravskob = [];
+  
+    for (let i = 0; i < str.length; i ++){
+      for (let j = 0; j < bracketsConfig.length; j ++){
+        if ((str[i] == bracketsConfig[j][0]) || (str[i] == bracketsConfig[j][1])){
+          arr.push(str[i]);
+        }
+      }
+    }
+  
+    for (let i = 0; i < bracketsConfig.length; i ++){
+      skob[i] = '' + bracketsConfig[i][0] + '' + bracketsConfig[i][1];
+      if (bracketsConfig[i][0] == bracketsConfig[i][1]){
+        ravskob.push(String(bracketsConfig[i][0]));
+      }
+    }
+  
+    for (let i = 0; i < str.length; i ++){
+      for (let j = 0; j < bracketsConfig.length; j ++){
+        if (str[i] == bracketsConfig[j][0]){
+          open.push(str[i]);
+        }
+        if (str[i] == bracketsConfig[j][1]){
+          close.push(str[i]);
+        }
+      }
+    }
+  
+    if ((str.length % 2) != 0){
+      return false;
+    }
+    
+   if (open.length != close.length){
+     return false;
+   }
+   
+    if ((close.includes(arr[0]) == true) && (ravskob.includes(arr[0]) == false)){
+      return false;
+    }
+    else {
+      for (let j = 0; j < arr.length; j++){
+        if (j == 0){
+          arr2.push(arr[j])
+        }
+        else {
+          if ((open.includes(arr[j]) == true) && (ravskob.includes(arr[j]) == false)){
+            arr2.push(arr[j])
+            }
+            else {
+              if ((ravskob.includes(arr[j]) == true) && (arr2[arr2.length-1] != arr[j])){
+                arr2.push(arr[j])
+              }
+              else {
+                let str2 = '' + arr2[arr2.length - 1] + '' + arr[j];
+                if (skob.includes(str2) == true){
+                  arr2.pop();
+                }
+                else {
+                  return false;
+                }
+              }
+            }
+          }
+        }
+      }
+       if (arr2.length != 0){
+        return false;
+      }
+    return true;
+    // your solution
 }
 
 
@@ -365,12 +456,22 @@ function timespanToHumanString(startDate, endDate) {
  *   1024, 2  => '10000000000'
  *   6561, 3  => '100000000'
  *    365, 2  => '101101101'
- *    365, 3  => '111112'
+ *    365, 3  => '111112'   
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    let inp = n;
+    let sour = num;
+    let result = 0;
+    inp = String(inp);
+    for(let i = 0; i < inp.length; i ++){
+        result = result + (sour.indexOf(inp.substr(inp.length - i - 1 , 1)) * Math.pow(sour.length , i));
+    }
+    return result;
+}
+function StrReverse(s){
+    return s.split("").reverse().join("");
 }
 
 

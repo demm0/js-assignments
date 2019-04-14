@@ -12,7 +12,7 @@
 
 
 /**
- * Returns the functions composition of two specified functions f(x) and g(x).
+ *  f(x) and g(x).
  * The result of compose is to be a function of one argument, (lets call the argument x),
  * which works like applying function f to the result of applying function g to x, i.e.
  *  getComposition(f,g)(x) = f(g(x))
@@ -26,7 +26,7 @@
  *
  */
 function getComposition(f,g) {
-    throw new Error('Not implemented');
+    return x => f (g (x)); 
 }
 
 
@@ -47,7 +47,11 @@ function getComposition(f,g) {
  *
  */
 function getPowerFunction(exponent) {
-    return Math.pow(arguments , exponent);
+    let result = 1;
+    for (let i = 1; i <= exponent; i++){
+        result = result * arguments;
+    }
+    return result;
     //throw new Error('Not implemented');
 }
 
