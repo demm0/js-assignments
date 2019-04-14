@@ -105,11 +105,9 @@ function removeFalsyValues(arr) {
    arr = arr.filter(element => +element !== 0);
    arr = arr.filter(element => element !== '');
    arr = arr.filter(element => element !== false);
-   arr = arr.filter(element => Number.isNaN(element));
-   //arr = arr.filter(element => element !== undefined);
-   arr = arr.map(elem=>elem.length);
-  return arr;
-   // throw new Error('Not implemented');
+   arr = arr.filter(element => Number.isNaN(element) == false);
+   arr = arr.filter(element => element !== undefined);
+   return arr;
 }
 
 /**
@@ -246,7 +244,7 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-   throw new Error('Not implemented');
+   return arr.map (function(_, i) {return eval(arr.slice(0 , i + 1).join("+"));})
 }
 
 /**
@@ -261,9 +259,7 @@ function getMovingSum(arr) {
  * [ "a" ] => []
  */
 function getSecondItems(arr) {
-   console.log (arr);
-   return arr.filter(function callback(element , index, oldArr){if (index % 2 !== 0) {return string(element)}});
-   //throw new Error('Not implemented');
+   return arr.filter(function(_, i) {return i % 2 !== 0;});
 }
 
 
@@ -318,7 +314,13 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-   return arr.filter(element => typeof(element) === 'number').filter(element => element > 0);
+   arr = arr.filter(element => element > 0);
+   arr = arr.filter(element => typeof(element) == 'number');
+   arr = arr.filter(element => element !== '');
+   arr = arr.filter(element => element !== false);
+   arr = arr.filter(element => Number.isNaN(element) == false);
+   arr = arr.filter(element => element !== undefined);
+   return arr.length;
 }
  
 /** 
@@ -351,7 +353,9 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+   if (arr.length > 0){
+      return eval(arr.join("+"))}
+  else return 0;
 }
  
 /** 
@@ -367,7 +371,16 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-   throw new Error('Not implemented');
+   let length = arr.length;
+   arr = arr.filter(element => element !== 0);
+   arr = arr.filter(element => element !== null);
+   arr = arr.filter(element => element !== '');
+   arr = arr.filter(element => element !== false);
+   arr = arr.filter(element => Number.isNaN(element) !== true);
+   arr = arr.filter(element => element !== undefined);
+
+
+return length - arr.length;
 }
 
 /**
@@ -400,7 +413,8 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-   throw new Error('Not implemented');
+   return arr.join();
+   // throw new Error('Not implemented');
 }
 
 
@@ -538,10 +552,10 @@ function group(arr, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-   console.log(arr);
+   console.log(arr); 
    console.log(childrenSelector);
    console.log(arr.join(',').split(childrenSelector).join(''));
-   return arr.join(',').split(childrenSelector).join('');
+   return arr.join(',').split(',').map(elem=>elem)//.join(',').split(',');
 
 }
 
