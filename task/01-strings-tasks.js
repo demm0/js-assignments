@@ -98,26 +98,21 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    for (let i = 0; i < value.length; i++){
-        if ((value[i] = '\t') || (value[i] = '\f') || (value[i] = '\n') || (value[i] = '\r') || (value[i] = '\b')){
-            value.replace('i', '');
-            i--;
-        }
-    }
-    console.log(value.indexOf('\t'));
-    let arr =  value.split(' ');
+    let arr = value.split(' ');
     for (let i = 0; i < arr.length; i++){
+        arr[i].replace(/[^a-z0-9\s]/gi, ' ');
         arr[i].replace(' ', '');
+       
     }
     console.log(arr);
     let str = '';
     for (let i = 0; i < arr.length; i++){
-        if (arr[i].length > 0){
-            str = str + arr[i]+' ';
-        }
+        if (arr[i].length > 0) {str = str + arr[i] + ' ';}
     }
-    return str.slice(0,str.length-1);
-   // throw new Error('Not implemented');
+    str = str.slice(0, str.length-1);
+    console.log('_' + str+'_');
+   return str; 
+  // throw new Error('Not implemented');
 }
 
 /**
@@ -297,15 +292,11 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    /*console.log(typeof(value));
-    if ((typeof(value) === 'object') && (typeof(value[0] === 'string'))){
-        return true;
-    }
-    else{
-        if (typeof(value) === 'string') {console.log(true); return true}
+    console.log(value);
+        if ((typeof(value) === 'string') || (typeof(value[0]) === 'string')) {console.log(true); return true}
         else {console.log(false); return false};
-    }*/
-    throw new Error('Not implemented');
+    
+   // throw new Error('Not implemented');
 }
 
 

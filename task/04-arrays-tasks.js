@@ -38,11 +38,18 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   let count = 0;
-   return new Array(len).fill(-1).map(function callback(element) { 
-      count = count +2;
-      element = element + count;
+   
+   var arr = new Array(len);
+   console.log(arr);
+   arr = arr.fill(-1);
+   console.log(arr);
+   arr.map(function callback(element) { 
+      var count = 0;
+      return function () {count = count + 2;
+      return element = element + count;}
   });
+  console.log(arr);
+  return arr;
 // throw new Error('Not implemented');
 }
 
@@ -107,12 +114,12 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-   let a = arr.filter(element => +element !== 0);
+   arr = arr.filter(element => +element !== 0);
    arr = arr.filter(element => element !== '');
    arr = arr.filter(element => element !== false);
-   arr = arr.filter(element => element + 1 !== NaN);
-   arr = arr.filter(element => element !== undefined);
-   console.log(a);
+   arr = arr.filter(element => Number.isNaN(element));
+   //arr = arr.filter(element => element !== undefined);
+   arr = arr.map(elem=>elem.length);
   return arr;
    // throw new Error('Not implemented');
 }
@@ -158,13 +165,7 @@ function getStringsLength(arr) {
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-   let a = arr.slice(index, arr.length);
-   arr.splice(index,arr.length-index);
-   arr.push(item);
-   arr = arr.concat(a);
-   console.log(arr);
-   return arr;
-  // throw new Error('Not implemented');
+   return arr.splice(index, 0, item);
 }
 
 /**
@@ -218,7 +219,12 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-   throw new Error('Not implemented');
+      arrCSV = arr.split("\n");
+      console.log(arrCSV);
+      return arrCSV.map(function (element) {
+         return element.split(",");
+      });
+    //throw new Error('Not implemented');
 }
 
 /**
