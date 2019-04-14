@@ -38,19 +38,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-   
-   var arr = new Array(len);
-   console.log(arr);
-   arr = arr.fill(-1);
-   console.log(arr);
-   arr.map(function callback(element) { 
-      var count = 0;
-      return function () {count = count + 2;
-      return element = element + count;}
-  });
-  console.log(arr);
-  return arr;
-// throw new Error('Not implemented');
+   return Array.apply(null, {length: 2 * len}).map(Number.call, Number).map(elem => elem + 1).filter(elem => elem % 2 != 0);
 }
 
 
@@ -480,7 +468,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+   return Array.apply(null, {length: end - start + 1}).map(Number.call, Number).map(elem => elem + start);
 }
 
 /**
@@ -495,7 +483,12 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+   Array.prototype.unique = function() {
+      return this.filter(function(value, index, _this) {
+          return _this.indexOf(value) === index;
+      });
+  }
+      return arr.unique();
 }
 
 /**
@@ -528,7 +521,7 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(array, keySelector, valueSelector) {
+function group(arr, keySelector, valueSelector) {
    throw new Error('Not implemented');
 }
 
@@ -545,7 +538,11 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+   console.log(arr);
+   console.log(childrenSelector);
+   console.log(arr.join(',').split(childrenSelector).join(''));
+   return arr.join(',').split(childrenSelector).join('');
+
 }
 
 
@@ -562,7 +559,8 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+ //  return  arr.indexof(indexes);
+   throw new Error('Not implemented');
 }
 
 
@@ -585,7 +583,12 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+   if (arr.length % 2 == 0){
+      return arr.slice(arr.length - Math.floor(arr.length/2) , arr.length).concat(arr.slice(0 , Math.floor(arr.length/2)));
+  }
+  else{
+      return arr.slice(arr.length - Math.floor(arr.length/2) , arr.length).concat(arr.slice(Math.floor(arr.length/2) , Math.floor(arr.length/2) + 1 )).concat(arr.slice(0 , Math.floor(arr.length/2)));
+  }
 }
 
 

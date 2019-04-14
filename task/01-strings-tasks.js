@@ -101,13 +101,16 @@ function removeLeadingAndTrailingWhitespaces(value) {
     let arr = value.split(' ');
     for (let i = 0; i < arr.length; i++){
         arr[i].replace(/[^a-z0-9\s]/gi, ' ');
-        arr[i].replace(' ', '');
-       
+        arr[i].replace(' ', '');      
     }
-    console.log(arr);
     let str = '';
     for (let i = 0; i < arr.length; i++){
+        console.log('code ' + arr[i] + '=' + arr[i].charCodeAt());
         if (arr[i].length > 0) {str = str + arr[i] + ' ';}
+    }
+    for (let i = 0; i < str.length; i++){
+        console.log('code ' + arr[i] + '=' + arr[i].charCodeAt());
+        if (str[i] === '\t') {str.replace(i, '');}
     }
     str = str.slice(0, str.length-1);
     console.log('_' + str+'_');
@@ -220,12 +223,10 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    console.log(width);
-    console.log(height);
     let arr = [];
     for (let i = 0; i < width; i++){
         for (let j = 0; j < height; j++){
-            if ((i == 0) && (j == 0)){ arr[i][j] = '┌'}
+            if ((i == 0) && (j == 0)){ console.log(arr[i][j]); arr[i][j] = '┌';}
             else{
                 if ((i == 0) && (j == height-1)){ arr[i][j] = '┐'}
                 else{
@@ -246,6 +247,7 @@ function getRectangleString(width, height) {
     }
     let str = '';
     for (let i = 0; i < width; i++){
+        console.log(arr[i]);
         for (let j = 0; j < height; j++){
             str = str + arr[i][j]; 
         }
@@ -273,9 +275,30 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    console.log(str.encoding = "ROT13");
-    return str.encoding = "ROT13";
-    //throw new Error('Not implemented');
+    var code;
+      var string = "";
+    for (var i = 0; i < str.length; i++) {
+      var temp = str.charAt(i);
+      if ((temp !== " ") || (temp!== "!") || (temp!== "?")) {
+        code = temp.charCodeAt();
+       if ((code >= 65) && (code <= 90)) {
+            code = code + 13;
+            if (code < 65) {code = 64 + code - 90};
+            if (code > 90) {code = 64 + code - 90};
+            string += String.fromCharCode(code);
+        };
+        code = temp.charCodeAt();
+        if ((code >= 97) && (code <= 122)) {
+            code = code + 13;
+            if (code < 97) {code = 96 + code - 122};
+            if (code > 122) {code = 96 + code - 122};
+            string += String.fromCharCode(code);
+        }
+        code = temp.charCodeAt();
+        if ((code < 65) || ((code > 90) && (code < 97)) || (code > 122)) {string += temp;}
+      } 
+    }
+    return string;
 }
 
 /**
@@ -292,11 +315,14 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    console.log(value);
-        if ((typeof(value) === 'string') || (typeof(value[0]) === 'string')) {console.log(true); return true}
-        else {console.log(false); return false};
-    
-   // throw new Error('Not implemented');
+    if (typeof(value) === 'object') {
+        for (let key in value){
+            if (typeof(value[key]) === 'string') {return true}
+            else {return false};
+        }
+    }
+    if (typeof(value) === 'string') {return true}
+    else {return false};
 }
 
 
