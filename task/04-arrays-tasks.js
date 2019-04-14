@@ -378,9 +378,7 @@ function getFalsyValuesCount(arr) {
    arr = arr.filter(element => element !== false);
    arr = arr.filter(element => Number.isNaN(element) !== true);
    arr = arr.filter(element => element !== undefined);
-
-
-return length - arr.length;
+   return length - arr.length;
 }
 
 /**
